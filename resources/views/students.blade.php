@@ -1,10 +1,10 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot>
     <table class="content-center w-full border-collapse table-auto">
-        <caption class="caption-top">
+        <caption class="text-black caption-top dark:text-white">
             Student Data
         </caption>
-        <thead class="">
+        <thead class="text-black border-b dark:text-white dark:border-gray-700">
             <tr>
                 <th class="w-auto p-2 text-left border border-slate-600">No</th>
                 <th class="w-auto p-2 text-left border border-slate-600">Name</th>
@@ -16,7 +16,7 @@
         </thead>
         <tbody>
             @foreach ($students as $student)
-                <tr class="">
+                <tr class="text-black border-b dark:text-white dark:border-gray-700">
                     <th class="p-2 text-left border border-slate-600">{{ $student->id }}</th>
                     <th class="p-2 text-left border border-slate-600">{{ $student->name }}</th>
                     <th class="p-2 text-left border border-slate-600">{{ $student->grade->name }}</th>

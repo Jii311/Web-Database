@@ -1,131 +1,136 @@
-<nav class="bg-gray-800" x-data="{ isOpen: false }">
-    <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-        <div class="flex items-center justify-between h-16">
-            <div class="flex items-center">
-                <div class="flex-shrink-0">
-                    <img class="w-8 h-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                        alt="Your Company">
-                </div>
-                <div class="hidden md:block">
-                    <div class="flex items-baseline ml-10 space-x-4">
-                        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <x-nav-link href="/" :active="request()->is('home')">Home</x-nav-link>
-                        <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
-                        <x-nav-link href="/students" :active="request()->is('students')">Student</x-nav-link>
-                        <x-nav-link href="/grade" :active="request()->is('grade')">Grade</x-nav-link>
-                        <x-nav-link href="/department" :active="request()->is('department')">Department</x-nav-link>
-                    </div>
-                </div>
-            </div>
-            <div class="hidden md:block">
-                <div class="flex items-center ml-4 md:ml-6">
-                    <button type="button"
-                        class="relative p-1 text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                        <span class="absolute -inset-1.5"></span>
-                        <span class="sr-only">View notifications</span>
-                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                            aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                        </svg>
-                    </button>
+<nav class="bg-white border-gray-200 dark:bg-gray-900">
+    <div class="flex flex-wrap items-center justify-between max-w-screen-xl p-4 mx-auto">
+        <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo" />
+            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+        </a>
+        <div class="flex items-center space-x-3 md:order-2 md:space-x-0 rtl:space-x-reverse">
+            <!-- Dark Mode -->
+            <script>
+                // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+                if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                        '(prefers-color-scheme: dark)').matches)) {
+                    document.documentElement.classList.add('dark');
+                } else {
+                    document.documentElement.classList.remove('dark')
+                }
+            </script>
+            <button id="theme-toggle" type="button"
+                class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+                </svg>
+                <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+                        fill-rule="evenodd" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+            <script>
+                var themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+                var themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
 
-                    <!-- Profile dropdown -->
-                    <div class="relative ml-3">
-                        <div>
-                            <button type="button" @click="isOpen = !isOpen"
-                                class="relative flex items-center max-w-xs text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                                id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                <span class="absolute -inset-1.5"></span>
-                                <span class="sr-only">Open user menu</span>
-                                <img class="w-8 h-8 rounded-full"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt="">
-                            </button>
-                        </div>
-                        <div x-show="isOpen" x-transition:enter="transition ease-out duration-100 transform"
-                            x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-75 transform"
-                            x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-                            class="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-                            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button"
-                            tabindex="-1">
-                            <!-- Active: "bg-gray-100", Not Active: "" -->
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                                tabindex="-1" id="user-menu-item-0">Your Profile</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                                tabindex="-1" id="user-menu-item-1">Settings</a>
-                            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem"
-                                tabindex="-1" id="user-menu-item-2">Sign out</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="flex -mr-2 md:hidden">
-                <!-- Mobile menu button -->
-                <button type="button" @click="isOpen = !isOpen"
-                    class="relative inline-flex items-center justify-center p-2 text-gray-400 bg-gray-800 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                    aria-controls="mobile-menu" aria-expanded="false">
-                    <span class="absolute -inset-0.5"></span>
-                    <span class="sr-only">Open main menu</span>
-                    <!-- Menu open: "hidden", Menu closed: "block" -->
-                    <svg :class="{ 'hidden': isOpen, 'block': !isOpen }" class="block w-6 h-6" fill="none"
-                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                    </svg>
-                    <!-- Menu open: "block", Menu closed: "hidden" -->
-                    <svg :class="{ 'block': isOpen, 'hidden': !isOpen }" class="hidden w-6 h-6" fill="none"
-                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
+                // Change the icons inside the button based on previous settings
+                if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia(
+                        '(prefers-color-scheme: dark)').matches)) {
+                    themeToggleLightIcon.classList.remove('hidden');
+                } else {
+                    themeToggleDarkIcon.classList.remove('hidden');
+                }
 
-    <!-- Mobile menu, show/hide based on menu state. -->
-    <div x-show="isOpen" class="md:hidden" id="mobile-menu">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <x-nav-link-mobile href="/" :active="request()->is('home')">Home</x-nav-link-mobile>
-            <x-nav-link-mobile href="/contact" :active="request()->is('contact')">Contact</x-nav-link-mobile>
-            <x-nav-link-mobile href="/students" :active="request()->is('students')">Student</x-nav-link-mobile>
-            <x-nav-link-mobile href="/grade" :active="request()->is('grade')">Grade</x-nav-link-mobile>
-            <x-nav-link-mobile href="/department" :active="request()->is('department')">Department</x-nav-link-mobile>
+                var themeToggleBtn = document.getElementById('theme-toggle');
+
+                themeToggleBtn.addEventListener('click', function() {
+
+                    // toggle icons inside button
+                    themeToggleDarkIcon.classList.toggle('hidden');
+                    themeToggleLightIcon.classList.toggle('hidden');
+
+                    // if set via local storage previously
+                    if (localStorage.getItem('color-theme')) {
+                        if (localStorage.getItem('color-theme') === 'light') {
+                            document.documentElement.classList.add('dark');
+                            localStorage.setItem('color-theme', 'dark');
+                        } else {
+                            document.documentElement.classList.remove('dark');
+                            localStorage.setItem('color-theme', 'light');
+                        }
+
+                        // if NOT set via local storage previously
+                    } else {
+                        if (document.documentElement.classList.contains('dark')) {
+                            document.documentElement.classList.remove('dark');
+                            localStorage.setItem('color-theme', 'light');
+                        } else {
+                            document.documentElement.classList.add('dark');
+                            localStorage.setItem('color-theme', 'dark');
+                        }
+                    }
+
+                });
+            </script>
+            <button type="button"
+                class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
+                data-dropdown-placement="bottom">
+                <span class="sr-only">Open user menu</span>
+                <img class="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo">
+            </button>
+            <!-- Dropdown menu -->
+            <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                id="user-dropdown">
+                <div class="px-4 py-3">
+                    <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
+                    <span class="block text-sm text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                </div>
+                <ul class="py-2" aria-labelledby="user-menu-button">
+                    <li>
+                        <a href="/admin" :active="request() - > is('home-admin')"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Admin
+                            Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                            out</a>
+                    </li>
+                </ul>
+            </div>
+            <button data-collapse-toggle="navbar-user" type="button"
+                class="inline-flex items-center justify-center w-10 h-10 p-2 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-user" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 17 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 1h15M1 7h15M1 13h15" />
+                </svg>
+            </button>
         </div>
-        <div class="pt-4 pb-3 border-t border-gray-700">
-            <div class="flex items-center px-5">
-                <div class="flex-shrink-0">
-                    <img class="w-10 h-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt="">
-                </div>
-                <div class="ml-3">
-                    <div class="text-base font-medium leading-none text-white">Tom Cook</div>
-                    <div class="text-sm font-medium leading-none text-gray-400">tom@example.com</div>
-                </div>
-                <button type="button"
-                    class="relative flex-shrink-0 p-1 ml-auto text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                    <span class="absolute -inset-1.5"></span>
-                    <span class="sr-only">View notifications</span>
-                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                    </svg>
-                </button>
-            </div>
-            <div class="px-2 mt-3 space-y-1">
-                <a href="#"
-                    class="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:bg-gray-700 hover:text-white">Your
-                    Profile</a>
-                <a href="#"
-                    class="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:bg-gray-700 hover:text-white">Settings</a>
-                <a href="#"
-                    class="block px-3 py-2 text-base font-medium text-gray-400 rounded-md hover:bg-gray-700 hover:text-white">Sign
-                    out</a>
-            </div>
+        <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
+            <ul
+                class="flex flex-col p-4 mt-4 font-medium border border-gray-100 rounded-lg md:p-0 bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                    <x-nav-link href="/" :active="request()->is('home')">Home</x-nav-link>
+                </li>
+                <li>
+                    <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
+                <li>
+                    <x-nav-link href="/students" :active="request()->is('students')">Student</x-nav-link>
+                </li>
+                <li>
+                    <x-nav-link href="/grade" :active="request()->is('grade')">Grade</x-nav-link>
+                </li>
+                <li>
+                    <x-nav-link href="/department" :active="request()->is('department')">Department</x-nav-link>
+                </li>
+            </ul>
         </div>
     </div>
 </nav>

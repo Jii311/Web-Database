@@ -15,10 +15,10 @@
 
 <body class="h-full bg-white dark:bg-gray-700">
     <div class="min-h-full">
-        <x-navbar></x-navbar>
+        <x-navbar-admin></x-navbar-admin>
 
-        <main class="bg-white dark:bg-gray-700">
-            <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        <main class="h-auto p-4 pt-20 bg-white md:ml-64 dark:bg-gray-700">
+            <div class="px-4 py-6 mx-auto max-w-7xl sm:px-6 lg:px-8 ">
                 {{ $slot }}
             </div>
         </main>
